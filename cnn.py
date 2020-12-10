@@ -24,7 +24,7 @@ data = []
 labels = []
 
 print('[INFO] Image loading...')
-image_paths = sorted(list(paths.list_images('C:\\Users\\maxim\\Python\\Coco\\data')))
+image_paths = sorted(list(paths.list_images('./data')))
 random.seed(42)
 random.shuffle(image_paths)
 
