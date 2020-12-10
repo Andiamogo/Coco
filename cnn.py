@@ -62,7 +62,7 @@ H = model.fit_generator(
     verbose=1
 )
 
-model.save('saved_models/model.h5')
+model.save('models/model.h5')
 
 f = open('lab.pickle', 'wb')
 f.write(pickle.dumps(lb))
