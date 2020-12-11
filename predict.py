@@ -14,14 +14,10 @@ import math
 
 def load_cnn():
     print('[INFO] CNN Network loading...')
-    model = load_model('models/model.h5')
+    model = load_model('./models/model.h5')
     lb = pickle.loads(open('lab.pickle', 'rb').read())
 
     return model, lb
-
-    name, score = classify(filename, model, lb)
-    print(f'{name} : {score}')
-    return
 
 def classify(filename, model, lb):
     image = cv2.imread(filename)
