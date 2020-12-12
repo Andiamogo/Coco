@@ -1,5 +1,5 @@
 from keras.preprocessing.image import img_to_array
-from keras.models import load_model
+from tensorflow.keras.models import load_model
 import numpy as np
 import argparse
 import imutils
@@ -20,6 +20,7 @@ def load_cnn():
     return model, lb
 
 def classify(filename, model, lb):
+    print(filename)
     image = cv2.imread(filename)
     output = image.copy()
 
@@ -33,41 +34,3 @@ def classify(filename, model, lb):
     label = lb.classes_[idx]
     
     return label, proba[idx] * 100
-
-
-total = {
-    "1c": 0,
-    "2c": 0,
-    "5c": 0,
-    "10c": 0,
-    "20c": 0,
-    "50c": 0,
-    "1e": 0,
-    "2e": 0,
-}
-
-succeded = {
-    "1c": 0,
-    "2c": 0,
-    "5c": 0,
-    "10c": 0,
-    "20c": 0,
-    "50c": 0,
-    "1e": 0,
-    "2e": 0,
-}
-
-model, lb = load_cnn()
-for root, dirs, files in os.walk('./data'):
-    for file in files:
-        name, score = classify(
-            os.path.join(root, file),
-            model,
-            lb
-        )
-        if name == root.split('/')[-1]:
-            succeded[root.split('/')[-1]] += 1
-        total[root.split('/')[-1]] += 1
-
-for e in succeded:
-    print(f'Correct prediction rate for {e} is : {succeded[e]/total[e]}')
