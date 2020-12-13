@@ -14,7 +14,8 @@ def upload_file():
         model, lb = load_cnn()
         name, prob = classify(path, model, lb)
         os.remove(path)
-        return redirect(url_for('upload_file', name=name, prob=prob))
+        return name
+        #return redirect(url_for('upload_file', name=name, prob=prob))
     else:
         name = request.args.get('name')
         prob = request.args.get('prob')
@@ -23,4 +24,4 @@ def upload_file():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0')
